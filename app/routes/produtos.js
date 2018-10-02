@@ -1,18 +1,13 @@
+var connectionFactory = require('../infra/connectionFactory');
+
 module.exports = function(app) {
     app.get('/produtos', function(req, response){
-        var mysql = require('mysql');
-        var connecetion = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'ibt1705',
-            database: 'livraria_nodejs'
-        });
+        var connection = connectionFactory();
 
-        connecetion.query('select * from livros', function(erro, resultados){
+        connection.query('select * from livros', function(erros, resultados){
             response.render("produtos/lista", {lista:resultados})
         });
 
-        connecetion.end();
-
+        connection.end();
     });
 }
