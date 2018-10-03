@@ -10,14 +10,7 @@ module.exports = function(app) {
         connection.end();
     });
     
-    app.get('/produtos/remove', function(req, response){
-        var connection = app.infra.connectionFactory();
-        var produtosDAO = app.infra.produtosDAO(connection);
-        var produto = produtosDAO.carrega(id,callback)
-        if (produto != null) {
-            produtosDAO.remove(produto,callback);
-        }
-
-        connection.end();
+    app.get('/produtos/adicionar', function(req, response){
+        response.render("produtos/adiciona");
     });
 }
