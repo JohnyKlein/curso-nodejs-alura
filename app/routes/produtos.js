@@ -16,10 +16,11 @@ module.exports = function(app) {
 
     app.post('/produtos/salvar', function(req, response){
         var produto = req.body;
-        console.log(produto);
-
-        response.render(produto);
+        var connection = app.infra.connectionFactory();
         
-        // response.render("produtos/adiciona");
+        var produtosDAO = new app.infra.ProdutosDAO(connection);
+        produtosDAO.salva(produto, function(erros,resultados){
+            response.render('produtos/lista');
+        }); 
     });
 }
