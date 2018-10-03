@@ -1,9 +1,9 @@
 module.exports = function(app) {
     app.get('/produtos', function(req, response){
         var connection = app.infra.connectionFactory();
-        var produtosBD = new app.infra.produtosBD(connection);
+        var produtosDAO = new app.infra.ProdutosDAO(connection);
 
-        produtosBD.lista(function(erros, resultados){
+        produtosDAO.lista(function(erros, resultados){
             response.render("produtos/lista", {lista:resultados})
         });
 
@@ -12,10 +12,10 @@ module.exports = function(app) {
     
     app.get('/produtos/remove', function(req, response){
         var connection = app.infra.connectionFactory();
-        var produtosBD = app.infra.produtosBD(connection);
-        var produto = produtosBD.carrega(id,callback)
+        var produtosDAO = app.infra.produtosDAO(connection);
+        var produto = produtosDAO.carrega(id,callback)
         if (produto != null) {
-            produtosBD.remove(produto,callback);
+            produtosDAO.remove(produto,callback);
         }
 
         connection.end();
