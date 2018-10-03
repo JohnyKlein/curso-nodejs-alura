@@ -13,4 +13,13 @@ module.exports = function(app) {
     app.get('/produtos/adicionar', function(req, response){
         response.render("produtos/adiciona");
     });
+
+    app.post('/produtos/salvar', function(req, response){
+        var produto = req.body;
+        console.log(produto);
+
+        response.render(produto);
+        
+        // response.render("produtos/adiciona");
+    });
 }
